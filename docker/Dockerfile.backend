@@ -1,21 +1,19 @@
 FROM ubuntu:22.04
 
-# Set environment variables to avoid interactive prompts
+# Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=UTC
 
-# Install system dependencies including Java for OpenSearch
+# Install minimal dependencies
 RUN apt-get update && apt-get install -y \
     curl \
     wget \
     python3 \
     python3-pip \
-    python3-venv \
     openjdk-11-jre-headless \
-    supervisor \
     && rm -rf /var/lib/apt/lists/*
 
-# Set Java environment
+# Set Java environment  
 ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 
 # Accept build arguments
@@ -28,16 +26,12 @@ ENV OPENSEARCH_HOST=$OPENSEARCH_HOST
 
 WORKDIR /app
 
-# Copy requirements first for better caching
+# Copy requirements and install Python dependencies
 COPY requirements.txt .
-
-# Install Python dependencies
 RUN pip3 install -r requirements.txt
 
-# Copy the backend directory into the container
+# Copy the backend directory
 COPY backend/ .
-
-# Set Python path to include the app directory
 ENV PYTHONPATH=/app
 
 # Download and install OpenSearch
@@ -46,82 +40,47 @@ RUN wget https://artifacts.opensearch.org/releases/bundle/opensearch/2.11.1/open
     && mv opensearch-2.11.1 /opt/opensearch \
     && rm opensearch-2.11.1-linux-x64.tar.gz
 
-# Create opensearch user and directories
+# Create opensearch user
 RUN groupadd -r opensearch && useradd -r -g opensearch opensearch \
     && mkdir -p /opt/opensearch/data /opt/opensearch/logs \
     && chown -R opensearch:opensearch /opt/opensearch
 
-# Create OpenSearch configuration
-RUN echo "cluster.name: docker-cluster" > /opt/opensearch/config/opensearch.yml \
+# Create minimal OpenSearch configuration for low memory
+RUN echo "cluster.name: minimal-cluster" > /opt/opensearch/config/opensearch.yml \
+    && echo "node.name: single-node" >> /opt/opensearch/config/opensearch.yml \
     && echo "network.host: 0.0.0.0" >> /opt/opensearch/config/opensearch.yml \
     && echo "discovery.type: single-node" >> /opt/opensearch/config/opensearch.yml \
     && echo "plugins.security.disabled: true" >> /opt/opensearch/config/opensearch.yml \
     && echo "bootstrap.memory_lock: false" >> /opt/opensearch/config/opensearch.yml \
-    && echo "indices.query.bool.max_clause_count: 1024" >> /opt/opensearch/config/opensearch.yml
+    && echo "http.max_content_length: 10mb" >> /opt/opensearch/config/opensearch.yml \
+    && echo "indices.memory.index_buffer_size: 5%" >> /opt/opensearch/config/opensearch.yml \
+    && echo "indices.memory.min_index_buffer_size: 12mb" >> /opt/opensearch/config/opensearch.yml \
+    && echo "thread_pool.write.queue_size: 200" >> /opt/opensearch/config/opensearch.yml \
+    && echo "thread_pool.search.queue_size: 100" >> /opt/opensearch/config/opensearch.yml
 
-# Set OpenSearch JVM options for low memory
-RUN echo "-Xms256m" > /opt/opensearch/config/jvm.options.d/heap.options \
-    && echo "-Xmx256m" >> /opt/opensearch/config/jvm.options.d/heap.options
+# Ultra-low memory JVM settings (128MB total)
+RUN echo "-Xms128m" > /opt/opensearch/config/jvm.options.d/memory.options \
+    && echo "-Xmx128m" >> /opt/opensearch/config/jvm.options.d/memory.options \
+    && echo "-XX:+UseG1GC" >> /opt/opensearch/config/jvm.options.d/memory.options \
+    && echo "-XX:MaxGCPauseMillis=50" >> /opt/opensearch/config/jvm.options.d/memory.options \
+    && echo "-XX:+DisableExplicitGC" >> /opt/opensearch/config/jvm.options.d/memory.options
 
-# Create supervisor configuration
-RUN echo "[supervisord]" > /etc/supervisor/conf.d/supervisord.conf \
-    && echo "nodaemon=true" >> /etc/supervisor/conf.d/supervisord.conf \
-    && echo "user=root" >> /etc/supervisor/conf.d/supervisord.conf \
-    && echo "" >> /etc/supervisor/conf.d/supervisord.conf \
-    && echo "[program:opensearch]" >> /etc/supervisor/conf.d/supervisord.conf \
-    && echo "command=/opt/opensearch/bin/opensearch" >> /etc/supervisor/conf.d/supervisord.conf \
-    && echo "user=opensearch" >> /etc/supervisor/conf.d/supervisord.conf \
-    && echo "autostart=true" >> /etc/supervisor/conf.d/supervisord.conf \
-    && echo "autorestart=true" >> /etc/supervisor/conf.d/supervisord.conf \
-    && echo "stdout_logfile=/var/log/opensearch.log" >> /etc/supervisor/conf.d/supervisord.conf \
-    && echo "stderr_logfile=/var/log/opensearch.log" >> /etc/supervisor/conf.d/supervisord.conf \
-    && echo "" >> /etc/supervisor/conf.d/supervisord.conf \
-    && echo "[program:fastapi]" >> /etc/supervisor/conf.d/supervisord.conf \
-    && echo "command=python3 -m uvicorn main:app --host 0.0.0.0 --port 8000" >> /etc/supervisor/conf.d/supervisord.conf \
-    && echo "directory=/app" >> /etc/supervisor/conf.d/supervisord.conf \
-    && echo "user=root" >> /etc/supervisor/conf.d/supervisord.conf \
-    && echo "autostart=true" >> /etc/supervisor/conf.d/supervisord.conf \
-    && echo "autorestart=true" >> /etc/supervisor/conf.d/supervisord.conf \
-    && echo "stdout_logfile=/var/log/fastapi.log" >> /etc/supervisor/conf.d/supervisord.conf \
-    && echo "stderr_logfile=/var/log/fastapi.log" >> /etc/supervisor/conf.d/supervisord.conf
-
-# Create startup script
+# Create lightweight startup script
 RUN echo "#!/bin/bash" > /app/start.sh \
-    && echo "echo 'Starting OpenSearch first...'" >> /app/start.sh \
-    && echo "su - opensearch -c '/opt/opensearch/bin/opensearch' &" >> /app/start.sh \
-    && echo "OPENSEARCH_PID=\$!" >> /app/start.sh \
-    && echo "echo 'OpenSearch PID: '\$OPENSEARCH_PID" >> /app/start.sh \
-    && echo "echo 'Waiting for OpenSearch to start...'" >> /app/start.sh \
-    && echo "sleep 60" >> /app/start.sh \
-    && echo "MAX_RETRIES=30" >> /app/start.sh \
-    && echo "RETRY_COUNT=0" >> /app/start.sh \
-    && echo "until curl -s http://localhost:9200/_cluster/health >/dev/null 2>&1; do" >> /app/start.sh \
-    && echo "  echo 'Waiting for OpenSearch... (attempt '\$RETRY_COUNT'/'\$MAX_RETRIES')'" >> /app/start.sh \
-    && echo "  sleep 10" >> /app/start.sh \
-    && echo "  RETRY_COUNT=\$((RETRY_COUNT + 1))" >> /app/start.sh \
-    && echo "  if [ \$RETRY_COUNT -ge \$MAX_RETRIES ]; then" >> /app/start.sh \
-    && echo "    echo 'OpenSearch failed to start after '\$MAX_RETRIES' attempts'" >> /app/start.sh \
-    && echo "    echo 'OpenSearch logs:'" >> /app/start.sh \
-    && echo "    tail -50 /opt/opensearch/logs/*.log || echo 'No logs found'" >> /app/start.sh \
-    && echo "    exit 1" >> /app/start.sh \
-    && echo "  fi" >> /app/start.sh \
-    && echo "done" >> /app/start.sh \
-    && echo "echo 'OpenSearch is ready!'" >> /app/start.sh \
-    && echo "curl -X GET http://localhost:9200/_cluster/health?pretty" >> /app/start.sh \
+    && echo "echo 'Starting minimal OpenSearch...'" >> /app/start.sh \
+    && echo "su opensearch -c '/opt/opensearch/bin/opensearch &'" >> /app/start.sh \
+    && echo "sleep 30" >> /app/start.sh \
     && echo "echo 'Starting FastAPI...'" >> /app/start.sh \
     && echo "cd /app && python3 -m uvicorn main:app --host 0.0.0.0 --port 8000 &" >> /app/start.sh \
-    && echo "FASTAPI_PID=\$!" >> /app/start.sh \
-    && echo "echo 'FastAPI PID: '\$FASTAPI_PID" >> /app/start.sh \
-    && echo "echo 'Both services are running!'" >> /app/start.sh \
     && echo "wait" >> /app/start.sh \
     && chmod +x /app/start.sh
 
 # Expose ports
 EXPOSE 8000 9200
 
-# Health check - more lenient for slow startup
-HEALTHCHECK --interval=60s --timeout=30s --start-period=300s --retries=5 \
+# Simple health check
+HEALTHCHECK --interval=60s --timeout=30s --start-period=60s --retries=3 \
     CMD curl -f http://localhost:8000/ || exit 1
 
-# Run both services
+# Run services
 CMD ["/app/start.sh"]
