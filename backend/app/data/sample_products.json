@@ -1,0 +1,476 @@
+[
+  {
+    "name": "iPhone 15 Pro Max",
+    "description": "Latest flagship smartphone from Apple with titanium design, A17 Pro chip, and advanced camera system",
+    "category": "smartphones",
+    "brand": "Apple",
+    "price": 1199.99,
+    "stock": 50,
+    "rating": 4.8,
+    "reviews_count": 2540,
+    "image_url": "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=400&h=400&fit=crop",
+    "specifications": {
+      "display": "6.7-inch Super Retina XDR",
+      "processor": "A17 Pro chip",
+      "storage": "256GB",
+      "camera": "48MP main, 12MP ultra-wide, 12MP telephoto",
+      "battery": "Up to 29 hours video playback",
+      "material": "Titanium",
+      "colors": "Natural Titanium, Blue Titanium, White Titanium, Black Titanium"
+    }
+  },
+  {
+    "name": "iPhone 14 Pro",
+    "description": "Previous generation iPhone with A16 Bionic chip and Dynamic Island",
+    "category": "smartphones",
+    "brand": "Apple",
+    "price": 999.99,
+    "stock": 75,
+    "rating": 4.7,
+    "reviews_count": 3420,
+    "image_url": "https://images.unsplash.com/photo-1678652197831-2d180705cd2c?w=400&h=400&fit=crop",
+    "specifications": {
+      "display": "6.1-inch Super Retina XDR",
+      "processor": "A16 Bionic chip",
+      "storage": "128GB",
+      "camera": "48MP main, 12MP ultra-wide, 12MP telephoto",
+      "battery": "Up to 23 hours video playback",
+      "colors": "Deep Purple, Gold, Silver, Space Black"
+    }
+  },
+  {
+    "name": "iPhone 13",
+    "description": "Reliable iPhone with A15 Bionic chip and excellent camera performance",
+    "category": "smartphones",
+    "brand": "Apple",
+    "price": 729.99,
+    "stock": 120,
+    "rating": 4.6,
+    "reviews_count": 5680,
+    "image_url": "https://images.unsplash.com/photo-1632661674596-df8be070a5c5?w=400&h=400&fit=crop",
+    "specifications": {
+      "display": "6.1-inch Super Retina XDR",
+      "processor": "A15 Bionic chip",
+      "storage": "128GB",
+      "camera": "12MP dual-camera system",
+      "battery": "Up to 19 hours video playback",
+      "colors": "Pink, Blue, Midnight, Starlight, Red"
+    }
+  },
+  {
+    "name": "Samsung Galaxy S24 Ultra",
+    "description": "Premium Android smartphone with S Pen, powerful cameras, and AI features",
+    "category": "smartphones",
+    "brand": "Samsung",
+    "price": 1299.99,
+    "stock": 35,
+    "rating": 4.7,
+    "reviews_count": 1890,
+    "image_url": "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=400&h=400&fit=crop",
+    "specifications": {
+      "display": "6.8-inch Dynamic AMOLED 2X",
+      "processor": "Snapdragon 8 Gen 3",
+      "storage": "512GB",
+      "camera": "200MP main, 50MP telephoto, 10MP telephoto, 12MP ultra-wide",
+      "battery": "5000mAh",
+      "s_pen": "Built-in S Pen",
+      "colors": "Titanium Black, Titanium Gray, Titanium Violet, Titanium Yellow"
+    }
+  },
+  {
+    "name": "Samsung Galaxy S23",
+    "description": "Flagship Android smartphone with excellent camera and performance",
+    "category": "smartphones",
+    "brand": "Samsung",
+    "price": 899.99,
+    "stock": 60,
+    "rating": 4.5,
+    "reviews_count": 2340,
+    "image_url": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop",
+    "specifications": {
+      "display": "6.1-inch Dynamic AMOLED 2X",
+      "processor": "Snapdragon 8 Gen 2",
+      "storage": "256GB",
+      "camera": "50MP main, 12MP ultra-wide, 10MP telephoto",
+      "battery": "3900mAh",
+      "colors": "Phantom Black, Cream, Green, Lavender"
+    }
+  },
+  {
+    "name": "Google Pixel 8 Pro",
+    "description": "AI-powered smartphone with exceptional computational photography",
+    "category": "smartphones",
+    "brand": "Google",
+    "price": 999.99,
+    "stock": 40,
+    "rating": 4.6,
+    "reviews_count": 1560,
+    "image_url": "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=400&h=400&fit=crop",
+    "specifications": {
+      "display": "6.7-inch LTPO OLED",
+      "processor": "Google Tensor G3",
+      "storage": "256GB",
+      "camera": "50MP main, 48MP ultra-wide, 48MP telephoto",
+      "battery": "5050mAh",
+      "colors": "Obsidian, Porcelain, Bay"
+    }
+  },
+  {
+    "name": "MacBook Pro 16-inch M3",
+    "description": "Professional laptop with M3 chip, stunning Liquid Retina XDR display, and all-day battery life",
+    "category": "laptops",
+    "brand": "Apple",
+    "price": 2499.99,
+    "stock": 25,
+    "rating": 4.9,
+    "reviews_count": 1240,
+    "image_url": "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=400&h=400&fit=crop",
+    "specifications": {
+      "processor": "Apple M3 chip",
+      "display": "16.2-inch Liquid Retina XDR",
+      "memory": "18GB unified memory",
+      "storage": "512GB SSD",
+      "ports": "3x Thunderbolt 4, HDMI, SDXC, MagSafe 3",
+      "battery": "Up to 22 hours",
+      "colors": "Space Gray, Silver"
+    }
+  },
+  {
+    "name": "MacBook Air M2",
+    "description": "Thin and light laptop with M2 chip and excellent battery life",
+    "category": "laptops",
+    "brand": "Apple",
+    "price": 1199.99,
+    "stock": 45,
+    "rating": 4.8,
+    "reviews_count": 1890,
+    "image_url": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400&h=400&fit=crop",
+    "specifications": {
+      "processor": "Apple M2 chip",
+      "display": "13.6-inch Liquid Retina",
+      "memory": "8GB unified memory",
+      "storage": "256GB SSD",
+      "ports": "2x Thunderbolt, MagSafe 3",
+      "battery": "Up to 18 hours",
+      "colors": "Midnight, Starlight, Space Gray, Silver"
+    }
+  },
+  {
+    "name": "MacBook Pro 14-inch M3",
+    "description": "Compact professional laptop with M3 chip and pro features",
+    "category": "laptops",
+    "brand": "Apple",
+    "price": 1999.99,
+    "stock": 30,
+    "rating": 4.8,
+    "reviews_count": 890,
+    "image_url": "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=400&h=400&fit=crop",
+    "specifications": {
+      "processor": "Apple M3 chip",
+      "display": "14.2-inch Liquid Retina XDR",
+      "memory": "8GB unified memory",
+      "storage": "512GB SSD",
+      "ports": "3x Thunderbolt 4, HDMI, SDXC, MagSafe 3",
+      "battery": "Up to 17 hours",
+      "colors": "Space Gray, Silver"
+    }
+  },
+  {
+    "name": "Dell XPS 13 Plus",
+    "description": "Ultra-portable laptop with stunning InfinityEdge display and premium build quality",
+    "category": "laptops",
+    "brand": "Dell",
+    "price": 1399.99,
+    "stock": 40,
+    "rating": 4.4,
+    "reviews_count": 1560,
+    "image_url": "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=400&h=400&fit=crop",
+    "specifications": {
+      "processor": "Intel Core i7-1360P",
+      "display": "13.4-inch FHD+ InfinityEdge",
+      "memory": "16GB LPDDR5",
+      "storage": "512GB PCIe NVMe SSD",
+      "graphics": "Intel Iris Xe",
+      "ports": "2x Thunderbolt 4",
+      "colors": "Platinum, Graphite"
+    }
+  },
+  {
+    "name": "Dell XPS 15",
+    "description": "High-performance laptop with discrete graphics and large display",
+    "category": "laptops",
+    "brand": "Dell",
+    "price": 1899.99,
+    "stock": 25,
+    "rating": 4.5,
+    "reviews_count": 920,
+    "image_url": "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=400&h=400&fit=crop",
+    "specifications": {
+      "processor": "Intel Core i7-13700H",
+      "display": "15.6-inch FHD+ InfinityEdge",
+      "memory": "16GB DDR5",
+      "storage": "512GB PCIe NVMe SSD",
+      "graphics": "NVIDIA GeForce RTX 4050",
+      "battery": "Up to 13 hours",
+      "colors": "Platinum Silver"
+    }
+  },
+  {
+    "name": "Lenovo ThinkPad X1 Carbon",
+    "description": "Business laptop with excellent keyboard and durability",
+    "category": "laptops",
+    "brand": "Lenovo",
+    "price": 1599.99,
+    "stock": 35,
+    "rating": 4.6,
+    "reviews_count": 1340,
+    "image_url": "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=400&h=400&fit=crop",
+    "specifications": {
+      "processor": "Intel Core i7-1355U",
+      "display": "14-inch FHD+ IPS",
+      "memory": "16GB LPDDR5",
+      "storage": "512GB PCIe SSD",
+      "graphics": "Intel Iris Xe",
+      "battery": "Up to 15 hours",
+      "colors": "Black"
+    }
+  },
+  {
+    "name": "Sony WH-1000XM5",
+    "description": "Industry-leading noise canceling wireless headphones with exceptional sound quality",
+    "category": "headphones",
+    "brand": "Sony",
+    "price": 399.99,
+    "stock": 75,
+    "rating": 4.7,
+    "reviews_count": 3420,
+    "image_url": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400&h=400&fit=crop",
+    "specifications": {
+      "driver": "30mm driver unit",
+      "noise_canceling": "Industry-leading noise canceling",
+      "battery": "30 hours with ANC",
+      "connectivity": "Bluetooth 5.2, NFC",
+      "controls": "Touch sensor controls",
+      "microphone": "Precise Voice Pickup Technology",
+      "colors": "Black, Silver"
+    }
+  },
+  {
+    "name": "Sony WH-1000XM4",
+    "description": "Premium noise canceling headphones with excellent sound and comfort",
+    "category": "headphones",
+    "brand": "Sony",
+    "price": 349.99,
+    "stock": 90,
+    "rating": 4.6,
+    "reviews_count": 5670,
+    "image_url": "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=400&h=400&fit=crop",
+    "specifications": {
+      "driver": "40mm driver unit",
+      "noise_canceling": "Industry-leading noise canceling",
+      "battery": "30 hours with ANC",
+      "connectivity": "Bluetooth 5.0, NFC",
+      "controls": "Touch sensor controls",
+      "colors": "Black, Silver, Blue, Midnight Blue"
+    }
+  },
+  {
+    "name": "Bose QuietComfort 45",
+    "description": "Comfortable noise canceling headphones with balanced sound",
+    "category": "headphones",
+    "brand": "Bose",
+    "price": 329.99,
+    "stock": 60,
+    "rating": 4.5,
+    "reviews_count": 2890,
+    "image_url": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop",
+    "specifications": {
+      "noise_canceling": "Quiet and Aware modes",
+      "battery": "24 hours wireless",
+      "connectivity": "Bluetooth 5.1",
+      "controls": "Button controls",
+      "microphone": "Built-in microphone",
+      "colors": "Black, White Smoke"
+    }
+  },
+  {
+    "name": "Apple AirPods Pro 2nd Gen",
+    "description": "Active noise cancellation, spatial audio, and adaptive transparency",
+    "category": "headphones",
+    "brand": "Apple",
+    "price": 249.99,
+    "stock": 100,
+    "rating": 4.6,
+    "reviews_count": 4560,
+    "image_url": "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?w=400&h=400&fit=crop",
+    "specifications": {
+      "chip": "Apple H2 chip",
+      "noise_canceling": "Active Noise Cancellation",
+      "battery": "Up to 6 hours listening, 30 hours with case",
+      "case": "MagSafe Charging Case",
+      "spatial_audio": "Personalized Spatial Audio",
+      "controls": "Touch control",
+      "colors": "White"
+    }
+  },
+  {
+    "name": "Apple AirPods 3rd Gen",
+    "description": "Spatial audio and improved battery life in a comfortable design",
+    "category": "headphones",
+    "brand": "Apple",
+    "price": 179.99,
+    "stock": 85,
+    "rating": 4.4,
+    "reviews_count": 3240,
+    "image_url": "https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?w=400&h=400&fit=crop",
+    "specifications": {
+      "chip": "Apple H1 chip",
+      "battery": "Up to 6 hours listening, 30 hours with case",
+      "case": "Lightning Charging Case",
+      "spatial_audio": "Spatial Audio",
+      "controls": "Force sensor",
+      "water_resistance": "IPX4",
+      "colors": "White"
+    }
+  },
+  {
+    "name": "iPad Pro 12.9-inch M2",
+    "description": "Ultimate iPad experience with M2 chip, Liquid Retina XDR display, and Apple Pencil support",
+    "category": "tablets",
+    "brand": "Apple",
+    "price": 1099.99,
+    "stock": 30,
+    "rating": 4.8,
+    "reviews_count": 1890,
+    "image_url": "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&h=400&fit=crop",
+    "specifications": {
+      "processor": "Apple M2 chip",
+      "display": "12.9-inch Liquid Retina XDR",
+      "storage": "256GB",
+      "camera": "12MP Wide, 10MP Ultra Wide",
+      "connectivity": "Wi-Fi 6E, 5G",
+      "apple_pencil": "Apple Pencil (2nd generation)",
+      "colors": "Silver, Space Gray"
+    }
+  },
+  {
+    "name": "iPad Air",
+    "description": "Powerful and versatile iPad with M1 chip and vibrant colors",
+    "category": "tablets",
+    "brand": "Apple",
+    "price": 599.99,
+    "stock": 55,
+    "rating": 4.7,
+    "reviews_count": 2340,
+    "image_url": "https://images.unsplash.com/photo-1561154464-82e9adf32764?w=400&h=400&fit=crop",
+    "specifications": {
+      "processor": "Apple M1 chip",
+      "display": "10.9-inch Liquid Retina",
+      "storage": "64GB",
+      "camera": "12MP Wide",
+      "connectivity": "Wi-Fi 6",
+      "apple_pencil": "Apple Pencil (2nd generation)",
+      "colors": "Space Gray, Pink, Purple, Blue, Starlight"
+    }
+  },
+  {
+    "name": "Microsoft Surface Pro 9",
+    "description": "2-in-1 laptop and tablet with touch screen, detachable keyboard, and Surface Pen support",
+    "category": "tablets",
+    "brand": "Microsoft",
+    "price": 999.99,
+    "stock": 45,
+    "rating": 4.4,
+    "reviews_count": 1560,
+    "image_url": "https://images.unsplash.com/photo-1587614297882-0ac30154d2e5?w=400&h=400&fit=crop",
+    "specifications": {
+      "processor": "Intel Core i5-1235U",
+      "display": "13-inch PixelSense Flow touchscreen",
+      "memory": "8GB LPDDR5",
+      "storage": "256GB SSD",
+      "graphics": "Intel Iris Xe",
+      "connectivity": "Wi-Fi 6E, Bluetooth 5.1",
+      "colors": "Platinum, Graphite, Sapphire, Forest"
+    }
+  },
+  {
+    "name": "Samsung Galaxy Tab S9",
+    "description": "Premium Android tablet with S Pen and AMOLED display",
+    "category": "tablets",
+    "brand": "Samsung",
+    "price": 799.99,
+    "stock": 40,
+    "rating": 4.5,
+    "reviews_count": 1240,
+    "image_url": "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&h=400&fit=crop",
+    "specifications": {
+      "processor": "Snapdragon 8 Gen 2",
+      "display": "11-inch Dynamic AMOLED 2X",
+      "memory": "8GB RAM",
+      "storage": "128GB",
+      "s_pen": "S Pen included",
+      "connectivity": "Wi-Fi 6E",
+      "colors": "Beige, Graphite"
+    }
+  },
+  {
+    "name": "ASUS ROG Strix G15",
+    "description": "Gaming laptop with powerful NVIDIA RTX graphics, fast refresh display, and RGB lighting",
+    "category": "gaming_laptops",
+    "brand": "ASUS",
+    "price": 1599.99,
+    "stock": 20,
+    "rating": 4.4,
+    "reviews_count": 890,
+    "image_url": "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=400&h=400&fit=crop",
+    "specifications": {
+      "processor": "AMD Ryzen 7 6800H",
+      "graphics": "NVIDIA GeForce RTX 3070 Ti",
+      "display": "15.6-inch FHD 300Hz",
+      "memory": "16GB DDR5",
+      "storage": "1TB PCIe NVMe SSD",
+      "keyboard": "RGB backlit keyboard",
+      "colors": "Eclipse Gray, Electro Punk"
+    }
+  },
+  {
+    "name": "Razer Blade 15",
+    "description": "Premium gaming laptop with sleek design, high-performance components, and advanced cooling",
+    "category": "gaming_laptops",
+    "brand": "Razer",
+    "price": 2199.99,
+    "stock": 15,
+    "rating": 4.6,
+    "reviews_count": 670,
+    "image_url": "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=400&h=400&fit=crop",
+    "specifications": {
+      "processor": "Intel Core i7-12800H",
+      "graphics": "NVIDIA GeForce RTX 3080 Ti",
+      "display": "15.6-inch QHD 240Hz",
+      "memory": "32GB DDR5",
+      "storage": "1TB PCIe Gen4 SSD",
+      "keyboard": "Per-key RGB backlit",
+      "colors": "Black"
+    }
+  },
+  {
+    "name": "MSI Gaming GE76",
+    "description": "High-performance gaming laptop with RGB lighting and powerful specs",
+    "category": "gaming_laptops",
+    "brand": "MSI",
+    "price": 1899.99,
+    "stock": 18,
+    "rating": 4.3,
+    "reviews_count": 540,
+    "image_url": "https://images.unsplash.com/photo-1625842268584-8f3296236761?w=400&h=400&fit=crop",
+    "specifications": {
+      "processor": "Intel Core i7-12700H",
+      "graphics": "NVIDIA GeForce RTX 3070",
+      "display": "17.3-inch FHD 144Hz",
+      "memory": "16GB DDR4",
+      "storage": "1TB NVMe SSD",
+      "keyboard": "RGB backlit per-key",
+      "colors": "Titanium Blue"
+    }
+  }
+]

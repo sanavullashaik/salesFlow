@@ -43,3 +43,4 @@ es_data/
 # System Files
 .DS_Store
 Thumbs.db
+.qodo

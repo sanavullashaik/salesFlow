@@ -25,11 +25,14 @@ async def root():
     return {
         "message": "Product Search API",
         "endpoints": {
-            "Check Emails": "/api/emails/check",
+            "Process Image": "/api/images/process",
             "Index Product": "/api/products",
             "Bulk Index": "/api/products/bulk",
             "Search": "/api/search",
-            "Match Products": "/api/match"
+            "Instant Search": "/api/instant-search",
+            "Autocomplete": "/api/autocomplete",
+            "Load Sample Data": "/api/data/load-sample",
+            "Recreate Index": "/api/index/recreate"
         }
     }
 

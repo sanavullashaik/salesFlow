@@ -9,25 +9,19 @@ langchain-core>=0.3.49
 langchain>=0.1.5
 langchain-community>=0.0.20
 langchain-groq>=0.3.2
-langchain-huggingface>=0.1.2
-langgraph>=0.0.15
 groq>=0.4.1
-sentence-transformers>=2.6.0
-torch>=2.2.0
 pydantic>=2.0.0
 
-# Email Processing
-imap-tools==1.0.0
-email-validator==2.1.0.post1
+# File Processing
 python-multipart==0.0.6
 
 # Vector Store and Search
-elasticsearch==8.11.1
-elasticsearch-dsl==8.11.0
+opensearch-py==2.4.2
 
 # Data Processing
 pandas==2.1.4
 numpy==1.26.3
+Pillow==10.2.0
 
 # Development Tools
 black==23.12.1
