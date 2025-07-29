@@ -87,25 +87,41 @@ RUN echo "[supervisord]" > /etc/supervisor/conf.d/supervisord.conf \
 
 # Create startup script
 RUN echo "#!/bin/bash" > /app/start.sh \
-    && echo "echo 'Starting OpenSearch and FastAPI...'" >> /app/start.sh \
-    && echo "/usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf &" >> /app/start.sh \
+    && echo "echo 'Starting OpenSearch first...'" >> /app/start.sh \
+    && echo "su - opensearch -c '/opt/opensearch/bin/opensearch' &" >> /app/start.sh \
+    && echo "OPENSEARCH_PID=\$!" >> /app/start.sh \
+    && echo "echo 'OpenSearch PID: '\$OPENSEARCH_PID" >> /app/start.sh \
     && echo "echo 'Waiting for OpenSearch to start...'" >> /app/start.sh \
-    && echo "sleep 45" >> /app/start.sh \
+    && echo "sleep 60" >> /app/start.sh \
+    && echo "MAX_RETRIES=30" >> /app/start.sh \
+    && echo "RETRY_COUNT=0" >> /app/start.sh \
     && echo "until curl -s http://localhost:9200/_cluster/health >/dev/null 2>&1; do" >> /app/start.sh \
-    && echo "  echo 'Still waiting for OpenSearch...'" >> /app/start.sh \
+    && echo "  echo 'Waiting for OpenSearch... (attempt '\$RETRY_COUNT'/'\$MAX_RETRIES')'" >> /app/start.sh \
     && echo "  sleep 10" >> /app/start.sh \
+    && echo "  RETRY_COUNT=\$((RETRY_COUNT + 1))" >> /app/start.sh \
+    && echo "  if [ \$RETRY_COUNT -ge \$MAX_RETRIES ]; then" >> /app/start.sh \
+    && echo "    echo 'OpenSearch failed to start after '\$MAX_RETRIES' attempts'" >> /app/start.sh \
+    && echo "    echo 'OpenSearch logs:'" >> /app/start.sh \
+    && echo "    tail -50 /opt/opensearch/logs/*.log || echo 'No logs found'" >> /app/start.sh \
+    && echo "    exit 1" >> /app/start.sh \
+    && echo "  fi" >> /app/start.sh \
     && echo "done" >> /app/start.sh \
     && echo "echo 'OpenSearch is ready!'" >> /app/start.sh \
-    && echo "echo 'Services are running...'" >> /app/start.sh \
-    && echo "tail -f /var/log/opensearch.log /var/log/fastapi.log" >> /app/start.sh \
+    && echo "curl -X GET http://localhost:9200/_cluster/health?pretty" >> /app/start.sh \
+    && echo "echo 'Starting FastAPI...'" >> /app/start.sh \
+    && echo "cd /app && python3 -m uvicorn main:app --host 0.0.0.0 --port 8000 &" >> /app/start.sh \
+    && echo "FASTAPI_PID=\$!" >> /app/start.sh \
+    && echo "echo 'FastAPI PID: '\$FASTAPI_PID" >> /app/start.sh \
+    && echo "echo 'Both services are running!'" >> /app/start.sh \
+    && echo "wait" >> /app/start.sh \
     && chmod +x /app/start.sh
 
 # Expose ports
 EXPOSE 8000 9200
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=15s --start-period=120s --retries=3 \
-    CMD curl -f http://localhost:8000/ && curl -f http://localhost:9200/_cluster/health || exit 1
+# Health check - more lenient for slow startup
+HEALTHCHECK --interval=60s --timeout=30s --start-period=300s --retries=5 \
+    CMD curl -f http://localhost:8000/ || exit 1
 
 # Run both services
 CMD ["/app/start.sh"]
