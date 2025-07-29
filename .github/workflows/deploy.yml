@@ -8,7 +8,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: salesflow
 
 jobs:
   build-and-test:
@@ -38,8 +38,8 @@ jobs:
           file: ./docker/Dockerfile.backend
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-backend:latest
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-backend:${{ github.sha }}
+            ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}-backend:latest
+            ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}-backend:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -50,8 +50,8 @@ jobs:
           file: ./docker/Dockerfile.frontend
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:latest
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:${{ github.sha }}
+            ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}-frontend:latest
+            ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}-frontend:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -83,7 +83,7 @@ jobs:
           version: '3.8'
           services:
             backend:
-              image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-backend:latest
+              image: ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}-backend:latest
               ports:
                 - "8000:8000"
               environment:
@@ -100,7 +100,7 @@ jobs:
                 retries: 3
 
             frontend:
-              image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:latest
+              image: ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}-frontend:latest
               ports:
                 - "8501:8501"
               environment:
